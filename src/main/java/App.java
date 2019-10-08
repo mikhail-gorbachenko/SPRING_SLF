@@ -3,7 +3,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
 
-
+    static ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
     Client cl;
     ConsoleEventLogger cel;
 
@@ -13,17 +13,19 @@ public class App {
     }
 
     private void logEvent(String msg){
+        Event event = (Event) ctx.getBean("event");
         String message = msg.replaceAll(cl.getId(), cl.getName());
-        cel.logEvent(message);
+        event.setMsg(message);
+        cel.logEvent(event);
     }
 
 
 
     public static void main(String[] args) {
 
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 
-        App app = (App) ctx.getBean("app");
+
+        App app =  (App) ctx.getBean("app");
 
         app.logEvent("Don't mess with 1");
 
