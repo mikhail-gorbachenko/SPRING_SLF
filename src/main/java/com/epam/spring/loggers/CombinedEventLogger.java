@@ -3,18 +3,21 @@ package com.epam.spring.loggers;
 import com.epam.spring.events.Event;
 
 import java.util.Collection;
+import java.util.List;
 
 public class CombinedEventLogger implements EventLogger{
 
-    Collection loggers;
+    private Collection<EventLogger> loggers;
 
-    CombinedEventLogger(Collection loggers){
+    CombinedEventLogger(Collection<EventLogger> loggers){
         this.loggers = loggers;
     }
 
     @Override
     public void logEvent(Event event) {
-        loggers.forEach(lgr -> logEvent(event));
+        for (EventLogger logger:loggers) { //почему здесь не сработала лямбда?
+            logger.logEvent(event);
+        }
     }
 
 }

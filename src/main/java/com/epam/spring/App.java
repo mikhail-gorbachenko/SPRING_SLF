@@ -25,12 +25,12 @@ public class App {
         this.loggers = loggers;
     }
 
-    private void logEvent(EventType type, String msg){
+    private void logEvent(EventType type, String msg) {
 
         EventLogger logger = loggers.get(type);
-            if (logger == null){
-                logger = defaultLogger;
-            }
+        if (logger == null) {
+            logger = defaultLogger;
+        }
 
         Event event = (Event) ctx.getBean("event");
         String message = msg.replaceAll(cl.getId(), cl.getName());
@@ -39,13 +39,12 @@ public class App {
     }
 
 
-
     public static void main(String[] args) {
 
-        App app =  (App) ctx.getBean("app");
-        app.logEvent(ERROR,"Don't mess with 1");
-        app.logEvent(INFO,"Don't mess with 1");
-        app.logEvent(null,"Don't mess with 1");
+        App app = (App) ctx.getBean("app");
+        app.logEvent(ERROR, "Don't mess with 1");
+        app.logEvent(INFO, "Don't mess with 1");
+        app.logEvent(null, "Don't mess with 1");
         ctx.close();
 
     }

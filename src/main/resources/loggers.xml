@@ -19,6 +19,7 @@
     <bean id="combinedLogger" class="com.epam.spring.loggers.CombinedEventLogger">
         <constructor-arg>
             <list>
+                <ref bean="consoleLogger"/>
                 <ref bean="fileLogger"/>
                 <ref bean="cacheFileLogger"/>
             </list>
