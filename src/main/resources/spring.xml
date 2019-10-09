@@ -10,11 +10,18 @@
     <bean id="app" class="com.epam.spring.App">
         <constructor-arg ref="client"/>
         <constructor-arg ref="cacheFileLogger"/>
+        <constructor-arg>
+            <map>
+                <entry key="INFO" value-ref="consoleLogger"/>
+                <entry key="ERROR" value-ref="combinedLogger"/>
+            </map>
+        </constructor-arg>
     </bean>
 
     <bean id="client" class="com.epam.spring.objects.Client">
         <constructor-arg value="1"/>
         <constructor-arg value="John Week"/>
+        <property name="greeting" value="I will dink from your skull!"/>
     </bean>
 
     <bean id="event" class="com.epam.spring.events.Event" scope="prototype">
