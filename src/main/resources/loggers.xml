@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="
  		http://www.springframework.org/schema/beans
- 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+ 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
     <bean id="consoleLogger" class="com.epam.spring.loggers.ConsoleEventLogger"/>
 
@@ -12,18 +15,19 @@
         <constructor-arg value="UTF-8"/>
     </bean>
 
-    <bean id="cacheFileLogger" class = "com.epam.spring.loggers.CacheFileLogger" destroy-method="destroy" parent="fileLogger">
+    <bean id="cacheFileLogger" class="com.epam.spring.loggers.CacheFileLogger" destroy-method="destroy"
+          parent="fileLogger">
         <constructor-arg value="5"/>
     </bean>
 
     <bean id="combinedLogger" class="com.epam.spring.loggers.CombinedEventLogger">
-        <constructor-arg>
-            <list>
-                <ref bean="consoleLogger"/>
-                <ref bean="fileLogger"/>
-                <ref bean="cacheFileLogger"/>
-            </list>
-        </constructor-arg>
+        <constructor-arg ref="loggerList"/>
     </bean>
+
+    <util:list id="loggerList">
+        <ref bean="consoleLogger"/>
+        <ref bean="fileLogger"/>
+        <ref bean="cacheFileLogger"/>
+    </util:list>
 
 </beans>
