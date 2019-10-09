@@ -1,3 +1,5 @@
+package com.epam.spring.objects;
+
 public class Client {
 
     private String id;

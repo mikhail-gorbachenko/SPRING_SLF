@@ -1,3 +1,5 @@
+package com.epam.spring.events;
+
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -26,7 +28,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event{" +
+        return "com.epam.spring.events.Event{" +
                 "id=" + id +
                 ", msg='" + msg + '\'' +
                 ", date=" + df.format(date) +

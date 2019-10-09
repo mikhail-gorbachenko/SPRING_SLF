@@ -1,13 +1,18 @@
-import org.springframework.context.ApplicationContext;
+package com.epam.spring;
+
+import com.epam.spring.events.Event;
+import com.epam.spring.loggers.EventLogger;
+import com.epam.spring.objects.Client;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
 
-    static ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
-    Client cl;
-    ConsoleEventLogger cel;
+    private static ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+    private Client cl;
+    private EventLogger cel;
 
-    public App(Client cl, ConsoleEventLogger cel) {
+    public App(Client cl, EventLogger cel) {
         this.cl = cl;
         this.cel = cel;
     }
@@ -23,11 +28,9 @@ public class App {
 
     public static void main(String[] args) {
 
-
-
         App app =  (App) ctx.getBean("app");
-
         app.logEvent("Don't mess with 1");
+        ctx.close();
 
     }
 
